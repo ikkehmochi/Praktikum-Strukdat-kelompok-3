@@ -113,44 +113,34 @@ void traverse(){
     }
    }
    
-/* structure of a stack node */
 struct sNode {
     char *data;
     struct sNode* next;
 };
  
-/* Function to push an item to stack*/
 void push(struct sNode** top_ref, char *judul);
  
-/* Function to pop an item from stack*/
 int pop(struct sNode** top_ref);
  
-/* structure of queue having two stacks */
 struct queue {
     struct sNode* stack1;
     struct sNode* stack2;
 };
  
-/* Function to enqueue an item to queue */
 void enQueue(struct queue* q, char *judul)
 {
     push(&q->stack1, judul);
 }
  
-/* Function to deQueue an item from queue */
 int deQueue(struct queue* q)
 {
     char *judul;
- 
-    /* If both stacks are empty then error */
     if (q->stack1 == NULL && q->stack2 == NULL) {
         printf("Q is empty");
         getchar();
         exit(0);
     }
  
-    /* Move elements from stack1 to stack 2 only if
-       stack2 is empty */
     if (q->stack2 == NULL) {
         while (q->stack1 != NULL) {
             *judul = pop(&q->stack1);
@@ -162,7 +152,6 @@ int deQueue(struct queue* q)
     return *judul;
 }
  
-/* Function to push an item to stack*/
 void push(struct sNode** top_ref, char *judul)
 {	
 	struct sNode* new_node = (struct sNode*)malloc(sizeof(struct sNode));
@@ -171,24 +160,16 @@ void push(struct sNode** top_ref, char *judul)
         getchar();
         exit(0);
     }
- 
-    /* put in the data */
     new_node->data = strcpy(judul);
- 
-    /* link the old list of the new node */
     new_node->next = (*top_ref);
- 
-    /* move the head to point to the new node */
     (*top_ref) = new_node;
 }
  
-/* Function to pop an item from stack*/
 int pop(struct sNode** top_ref)
 {
     int res;
     struct sNode* top;
- 
-    /*If stack is empty then error */
+
     if (*top_ref == NULL) {
         printf("Stack underflow \n");
         getchar();
@@ -210,7 +191,7 @@ int main(){
     enqueue(4,"Hanoman", "1004 Malam", "Fiksi");
     enqueue(5,"Fathur", "1005 Malam", "Fiksi");
     traverse();
-    //show_queuehead();
+    show_queuehead();
     isEmpty();
     isFull();
     dequeue();
