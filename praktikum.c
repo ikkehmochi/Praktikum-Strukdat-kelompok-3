@@ -48,23 +48,22 @@ void enqueue(int id, char peminjam[], char judul[], char genre[]){
     }
 }
 
-void Dequeue()
-{
-    void i;
-    void e = queue.data[queue.head];
-    for(i=queue.head; i<=queue.tail-1;i++);
-    {
-        printf("Data telah dihapus",queue.data[i]=queue.data[i+1]);
-    }
-    queue.tail--;
-    return e;
-}
 
-void showfront(){
-    if(IsEmpty())
-    printf("Antrian Penuh\n");
-    else 
-	printf("element yang ada di depan yaitu: %d",queue.head[queue.data]);
+void dequeue(){
+    if(current_queue!=0){
+    struct buku* temp=queuehead;
+    queuehead=temp->next;
+    current_queue--;
+    free(temp);
+    return;
+    }else{
+        printf("Tidak ada Queue\n");
+    }
+    
+}
+void show_queuehead(){
+    printf("Queue terdepan adalah : \nId Peminjam : %i\nNama Peminjam : %s\nJudul Buku : %s\nGenre Buku : %s\n\n", queuehead->id_peminjam, queuehead->nama_peminjam, queuehead->judul_buku, queuehead->genre_buku);
+    return;
 }
 
 void traverse(){
@@ -92,4 +91,5 @@ int main(){
     enqueue(4,"Hanoman", "1004 Malam", "Fiksi");
     enqueue(5,"Fathur", "1005 Malam", "Fiksi");
     traverse();
+    show_queuehead();
 }
