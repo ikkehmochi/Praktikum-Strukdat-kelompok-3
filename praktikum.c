@@ -47,6 +47,26 @@ void enqueue(int id, char peminjam[], char judul[], char genre[]){
         printf("Queue sudah penuh\n");
     }
 }
+
+void Dequeue()
+{
+    void i;
+    void e = queue.data[queue.head];
+    for(i=queue.head; i<=queue.tail-1;i++);
+    {
+        printf("Data telah dihapus",queue.data[i]=queue.data[i+1]);
+    }
+    queue.tail--;
+    return e;
+}
+
+void showfront(){
+    if(IsEmpty())
+    printf("Antrian Penuh\n");
+    else 
+	printf("element yang ada di depan yaitu: %d",queue.head[queue.data]);
+}
+
 void traverse(){
     if(current_queue!=0){
 
