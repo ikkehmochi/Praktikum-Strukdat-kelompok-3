@@ -15,7 +15,7 @@ struct buku{
 struct buku *queuehead;
 struct buku *queuetail;
 struct buku *new_data(int id, char peminjam[], char judul[], char genre[]){
-    struct buku *new= (struct buku*)malloc(sizeof(struct buku));
+    struct buku *new = (struct buku*)malloc(sizeof(struct buku));
     new->id_peminjam=id;
     strcpy(new->nama_peminjam, peminjam);
     strcpy(new->judul_buku, judul);
@@ -26,7 +26,7 @@ struct buku *new_data(int id, char peminjam[], char judul[], char genre[]){
 
 void enqueue(int id, char peminjam[], char judul[], char genre[]){
     if(current_queue<MAX_QUEUE){
-    struct queue *new= new_data(id,peminjam, judul, genre);
+    struct queue *new = new_data(id,peminjam, judul, genre);
     if(queuehead==NULL){
         queuehead=new;
         queuetail=new;
@@ -48,7 +48,6 @@ void enqueue(int id, char peminjam[], char judul[], char genre[]){
     }
 }
 
-
 void dequeue(){
     if(current_queue!=0){
     struct buku* temp=queuehead;
@@ -58,12 +57,41 @@ void dequeue(){
     return;
     }else{
         printf("Tidak ada Queue\n");
-    }
-    
+    }    
 }
+
 void show_queuehead(){
-    printf("Queue terdepan adalah : \nId Peminjam : %i\nNama Peminjam : %s\nJudul Buku : %s\nGenre Buku : %s\n\n", queuehead->id_peminjam, queuehead->nama_peminjam, queuehead->judul_buku, queuehead->genre_buku);
-    return;
+   printf("Queue terdepan adalah : \nId Peminjam : %i\nNama Peminjam : %s\nJudul Buku : %s\nGenre Buku : %s\n\n", queuehead->id_peminjam, queuehead->nama_peminjam, queuehead->judul_buku, queuehead->genre_buku);
+   return;
+ }
+
+int queueCount(){
+	if(queuetail==NULL){
+		return 0;
+	}else{
+		int banyak=0;
+		while(queuehead!=NULL){
+			queuehead=queuehead->next;
+			banyak++;
+		}
+		return banyak;
+	}
+}
+
+void isEmpty(){
+	if(queuetail==NULL){
+		printf("\n Queue masih kosong");
+	}else{
+		printf("\n Queue tidak kosong");
+	}
+}
+
+void isFull(){
+	if(current_queue==MAX_QUEUE){
+		printf("\n Queue Penuh");
+	}else{
+		printf("\n Queue Masih Bisa Diisi");
+	}
 }
 
 void traverse(){
@@ -84,6 +112,78 @@ void traverse(){
         return;
     }
    }
+   
+struct sNode {
+    char *data;
+    struct sNode* next;
+};
+ 
+void push(struct sNode** top_ref, char *judul);
+ 
+int pop(struct sNode** top_ref);
+ 
+struct queue {
+    struct sNode* stack1;
+    struct sNode* stack2;
+};
+ 
+void enQueue(struct queue* q, char *judul)
+{
+    push(&q->stack1, judul);
+}
+ 
+int deQueue(struct queue* q)
+{
+    char *judul;
+    if (q->stack1 == NULL && q->stack2 == NULL) {
+        printf("Q is empty");
+        getchar();
+        exit(0);
+    }
+ 
+    if (q->stack2 == NULL) {
+        while (q->stack1 != NULL) {
+            *judul = pop(&q->stack1);
+            push(&q->stack2, judul);
+        }
+    }
+ 
+    *judul = pop(&q->stack2);
+    return *judul;
+}
+ 
+void push(struct sNode** top_ref, char *judul)
+{	
+	struct sNode* new_node = (struct sNode*)malloc(sizeof(struct sNode));
+    if (new_node == NULL) {
+        printf("Stack overflow \n");
+        getchar();
+        exit(0);
+    }
+    new_node->data = strcpy(judul);
+    new_node->next = (*top_ref);
+    (*top_ref) = new_node;
+}
+ 
+int pop(struct sNode** top_ref)
+{
+    int res;
+    struct sNode* top;
+
+    if (*top_ref == NULL) {
+        printf("Stack underflow \n");
+        getchar();
+        exit(0);
+    }
+    else {
+        top = *top_ref;
+        res = top->data;
+        *top_ref = top->next;
+        free(top);
+        return res;
+    }
+}
+
 int main(){
     enqueue(0,"Abdurrahman", "1001 Malam", "Fiksi");
     enqueue(1,"Rizki", "1002 Malam", "Fiksi");
@@ -92,4 +192,22 @@ int main(){
     enqueue(5,"Fathur", "1005 Malam", "Fiksi");
     traverse();
     show_queuehead();
+    isEmpty();
+    isFull();
+    dequeue();
+    frontQueue();
+    printf("/nStack : ");
+    struct queue* q = (struct queue*)malloc(sizeof(struct queue));
+    q->stack1 = NULL;
+    q->stack2 = NULL;
+    enQueue(q, "1001 Malam");
+    enQueue(q, "1002 Malam");
+    enQueue(q, "1003 Malam");
+ 
+    //Dequeue items
+    printf("%d ", deQueue(q));
+    printf("%d ", deQueue(q));
+    printf("%d ", deQueue(q));
+ 
+    return 0;
 }
