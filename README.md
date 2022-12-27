@@ -2,7 +2,7 @@
 
 ## JUDUL
 ```
-Pengembalian buku perpustakaan (stack & queue)
+
 ```
 
 ## ANGGOTA KELOMPOK 7
@@ -16,7 +16,7 @@ Pengembalian buku perpustakaan (stack & queue)
 
 ## METODE YANG DIGUNAKAN
 ```
-Queue dan Stack
+
 ```
 
 ## LATAR BELAKANG
