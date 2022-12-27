@@ -56,15 +56,16 @@ void garis(int x) {
 void delay() {
 	int delay;
 	delay=1;
-	while(delay<1000000000) {
+	while(delay<200000000) {
 		delay++;
 	}
 }
 
 void load()
 {	
+ 	int i;
   	char load[] = {'S','T','A','R','T','>'};
-	for(int i=0; i<6; i++) {
+	for(i=0; i<6; i++) {
 		printf("%c\t", load[i]);
 		delay();
 	}
@@ -98,12 +99,10 @@ void enqueue(int id, char peminjam[], char judul[], char genre[]){
 					walker->next=new;
 					queuetail=new;
 					current_queue++;
-					printf(" \n Data Telah Ditambahkan.\n");
-					printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+					printf("\n Data Telah Ditambahkan.\n");
 				}
 	}else{
 	printf("\n Queue sudah penuh\n");
-	printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
 	}
 }
 
@@ -117,10 +116,11 @@ int inputCount(){
 void insert(){
 	system("cls");
 	header();
+	int i;
 	int j;
 	int count = inputCount();
-    for(int i=0; i<count; i++){
-		printf(" \n Data Pengembalian Buku Ke - %i\n",j+1);
+    for(i=0; i<count; i++){
+		printf("\n Data Pengembalian Buku Ke - %i\n",i+1);
 		printf(" ------------------------------------\n");
 	int id;
 		printf("\n Masukkan Id Peminjam: ");
@@ -153,45 +153,40 @@ void dequeue(){
 	struct buku* temp=queuehead;
 	queuehead=temp->next;
 	current_queue--;
-	printf(" \n Data teratas telah dihapus.\n");
-	printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+	printf("\n Data teratas telah dihapus.\n");
 	free(temp);
 	}
 	else{
-		printf(" \n Tidak ada Queue\n");
-		printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+		printf("\n Tidak ada Queue\n");
 	}
+	system("pause");
 }
 
 void checkQueue(){
 	system("cls");
 	header();
     if(queuetail==NULL){
-        printf("\n Queue masih kosong");
-        printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+        printf("\n Queue masih kosong\n");
     }else{
         if(current_queue==MAX_QUEUE){
-            printf("\n Queue Penuh");
-            printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+            printf("\n Queue Penuh\n");
         }else{
-            printf("\n Queue tidak kosong dan masih bisa diisi");
-            printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+            printf("\n Queue tidak kosong dan masih bisa diisi\n");
         }
     }
+    system("pause");
 }
 
 void show_queuehead(){
 	system("cls");
 	header();
 	if(current_queue == NULL){
-		printf(" \n Tidak ada Queue\n");
-		printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+		printf("\n Tidak ada Queue\n");
 	}
 	else{
-		printf(" \n Queue terdepan adalah : \n Id Peminjam : %i\n Nama Peminjam : %s\n Judul Buku : %s\n Genre Buku : %s\n\n", queuehead->id_peminjam, queuehead->nama_peminjam, queuehead->judul_buku, queuehead->genre_buku);
-		printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+		printf("\n Queue terdepan adalah : \n Id Peminjam : %i\n Nama Peminjam : %s\n Judul Buku : %s\n Genre Buku : %s\n\n", queuehead->id_peminjam, queuehead->nama_peminjam, queuehead->judul_buku, queuehead->genre_buku);
 	}
-	return;
+	system("pause");
 }
 
 void traverse(){
@@ -203,26 +198,23 @@ void traverse(){
 	    system("cls");
 	    pWalker = queuehead;
     		while (pWalker != NULL){
-    			printf(" \n Data Pengembalian Buku Ke - %i\n",j+1);
-		        printf(" \n Id Peminjam : %i\n Nama Peminjam : %s\n Judul Buku : %s\n Genre Buku : %s\n", pWalker->id_peminjam,pWalker->nama_peminjam,pWalker->judul_buku,pWalker->genre_buku);
+    			printf("\n Data Pengembalian Buku Ke - %i\n",j+1);
+		        printf("\n Id Peminjam : %i\n Nama Peminjam : %s\n Judul Buku : %s\n Genre Buku : %s\n", pWalker->id_peminjam,pWalker->nama_peminjam,pWalker->judul_buku,pWalker->genre_buku);
 		        pWalker = pWalker -> next;
 		        j++;
     		}
     		printf(" NULL\n");
-    		printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
-    		return;
 			}else{
-    		printf(" \n Tidak ada Queue\n");
-    		printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+    		printf("\n Tidak ada Queue\n");
 			}
+			system("pause");
 }
 
 void convert_queue_to_stack(){
 	system("cls");
 	header();
 	if(queuehead == NULL){
-	printf(" \n Queue kosong, tidak bisa dikonversi ke stack\n");
-	printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+	printf("\n Queue kosong, tidak bisa dikonversi ke stack\n");
 	return;
 	}
 		struct buku *temp = queuehead;
@@ -233,8 +225,8 @@ void convert_queue_to_stack(){
 			while(queuehead != NULL){
     		dequeue();
 		}
-		printf(" \n\n Data Telah Dikonversi Ke Stack\n");
-		printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+		printf("\n\n Data Telah Dikonversi Ke Stack\n");
+		system("pause");
 }
 
 void push(int data){
@@ -246,13 +238,12 @@ void push(int data){
         new->next = top;
         top = new;
         current_stack++;
-        printf(" \n Data Telah Ditambahkan.\n");
-		printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+        printf("\n Data Telah Ditambahkan.\n");
     }else{
         printf("\n Stack Penuh\n");
         printf("\n Data Tidak Bisa Ditambahkan\n");
-        printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
     }
+    system("pause");
 }
 
 void pop(){
@@ -263,28 +254,25 @@ void pop(){
         top = top->next;
         free(temp);
         printf("\n Data teratas telah dihapus\n");
-        printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
     }else{
         printf("\n Stack kosong\n");
-        printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
     }
+    system("pause");
 }
 
 void checkStack(){
 	system("cls");
 	header();
     if(top == NULL){
-        printf("\n Stack masih kosong");
-        printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+        printf("\n Stack masih kosong\n");
     }else{
 		if(current_stack == MAX_STACK){
-        	printf("\n Stack penuh");
-        	printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+        	printf("\n Stack penuh\n");
     	}else{
-        	printf("\n Stack tidak kosong dan masih bisa diisi");
-        	printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
+        	printf("\n Stack tidak kosong dan masih bisa diisi\n");
     	}
  	}
+ 	system("pause");
 }
 
 void show_stack(){
@@ -292,35 +280,47 @@ void show_stack(){
 	header();
     if(top == NULL){
         printf(" \n Stack kosong, tidak ada data yang ditampilkan\n");
-        printf(" \n Tekan ENTER Untuk Kembali Ke Menu Sebelumnya.\n");
         return;
     }
 
-    printf(" \n Isi stack:\n");
+    printf(" \n Isi stack : \n");
     struct stack *temp = top;
     while(temp != NULL){
-        printf(" %d\n", temp->data);
+        printf(" %d ->", temp->data);
         temp = temp->next;
     }
+    system("pause");
+}
+
+void show_stackhead(){
+	system("cls");
+	header();
+	if(top == NULL){
+		printf(" \n Tidak ada Stack\n");
+	}
+	else{
+		printf(" \n Stack terdepan adalah :  %i\n", top->data);
+	}
+	system("pause");
 }
 
 void menu(){
 		system("cls");
 		header();
 		printf("\t\t\t\t\t\t\tMENU UTAMA\n");
-	    puts("\n Pilih Menu dibawah ini untuk menjalankan aplikasi");
-	    puts("  1.  Tambah Queue");
-	    puts("  2.  Hapus Queue");
-	    puts("  3.  Tampilkan Queue Terdepan");
-	    puts("  4.  Check Full/Empety Queue");
-	    puts("  5.  Tampilkan Queue");
-	    puts("  6.  Konversi Queue ke Stack");
-	    puts("  7.  Tambah Data ke Stack");
-	    puts("  8.  Hapus Data dari Stack");
-	    puts("  9.  Tampilkan Stack Terdepan");
-	    puts(" 10.  Check Full/Empety Stack");
-	    puts(" 11.  Tampilkan Data Stack");
-	    puts(" Esc. Exit\n");
+	    printf("\n Pilih Menu dibawah ini untuk menjalankan aplikasi\n");
+	    printf("  1.  Tambah Queue\n");
+	    printf("  2.  Hapus Queue\n");
+	    printf("  3.  Tampilkan Queue Terdepan\n");
+	    printf("  4.  Check Full/Empety Queue\n");
+	    printf("  5.  Tampilkan Queuen\n");
+	    printf("  6.  Konversi Queue ke Stack\n");
+	    printf("  7.  Tambah Data ke Stack\n");
+	    printf("  8.  Hapus Data dari Stack\n");
+	    printf("  9.  Tampilkan Stack Terdepan\n");
+	    printf(" 10.  Check Full/Empety Stack\n");
+	    printf(" 11.  Tampilkan Data Stack\n");
+	    printf(" 00. Exit \n");
 }
 
 int main(){
@@ -328,7 +328,6 @@ int main(){
 	system("color 70");
 	gotoxy(32,13); 
 	load();
-	system("cls");
 		do{	system("cls");
 			menu();
 			printf(" Masukkan pilihan Anda: ");
@@ -362,6 +361,7 @@ int main(){
 						pop();
 						break;
 				case  9:// Tampilkan data terdepan pada stack
+						show_stackhead();
 						break;
 				case 10://Cek queue kosong/full
 						checkStack();
@@ -369,13 +369,13 @@ int main(){
 				case 11:// Tampilkan seluruh data pada stack
 						show_stack();
 						break;
-				case 15: // Keluar dari program
+				case 00: // Keluar dari program
 						printf("Terima kasih telah menggunakan program ini!\n");
 						break;
 				default:
 						printf("Pilihan tidak valid. Silakan masukkan pilihan kembali.\n");
 						break;
 			}
-		}while (pilihan != 15);
+		}while (pilihan != 00);
 		return 0;
 }
